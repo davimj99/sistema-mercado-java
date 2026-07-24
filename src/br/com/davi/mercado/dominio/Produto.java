@@ -1,7 +1,6 @@
 package br.com.davi.mercado.dominio;
 
 public class Produto {
-
     private int id;
     private String nome;
     private double preco;
@@ -15,7 +14,7 @@ public class Produto {
         this.nome = nome;
         this.preco = preco;
         this.quantidade = quantidade;
-    }
+    } //construtor
 
     public int getId() {
         return id;
