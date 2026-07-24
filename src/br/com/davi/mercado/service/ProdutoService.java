@@ -30,5 +30,20 @@ public class ProdutoService {
 
         quantidadeProdutos++;
         System.out.println("Produto cadastrado com sucesso!");
+        System.out.println("Quantidade de produtos: " + quantidadeProdutos);
+    }
+
+    public void listarProdutos(){
+        System.out.println("Quantidade de produtos cadastrados: " + quantidadeProdutos);
+        for (int i = 0; i < quantidadeProdutos; i++) {
+            Produto produto = produtos[i];
+            System.out.println("ID: " + produto.getId());
+            System.out.println("Nome: " + produto.getNome());
+            System.out.println("Preço: " + produto.getPreco());
+            System.out.println("Quantidade: " + produto.getQuantidade());
+            System.out.println("-------------------------");
+
+        }
+
     }
 }

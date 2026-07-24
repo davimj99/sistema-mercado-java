@@ -42,7 +42,7 @@ public class Main {
                     break;
 
                 case 2:
-                    System.out.println("\n>> Você escolheu LISTAR PRODUTOS.");
+                    produtoService.listarProdutos();
                     break;
 
                 case 3:
