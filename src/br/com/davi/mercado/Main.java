@@ -1,7 +1,6 @@
 package br.com.davi.mercado;
-
+import br.com.davi.mercado.dominio.Produto;
 import br.com.davi.mercado.service.ProdutoService;
-
 import java.util.Scanner;
 
 public class Main {
@@ -10,6 +9,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         ProdutoService produtoService = new ProdutoService();
+
 
         String[] menu = {
                 "1 - Cadastrar Produto",
@@ -46,11 +46,24 @@ public class Main {
                     break;
 
                 case 3:
-                    System.out.println("\n>> Você escolheu BUSCAR PRODUTO.");
+                    System.out.print("Digite o ID do produto: ");
+                    int id = scanner.nextInt();
+
+                    Produto produto = produtoService.buscarPorId(id);
+
+                    if (produto != null) {
+                        System.out.println("\nProduto encontrado!");
+                        System.out.println("ID: " + produto.getId());
+                        System.out.println("Nome: " + produto.getNome());
+                        System.out.println("Preço: " + produto.getPreco());
+                        System.out.println("Quantidade: " + produto.getQuantidade());
+                    } else {
+                        System.out.println("Produto não encontrado.");
+                    }
                     break;
 
                 case 4:
-                    System.out.println("\n>> Você escolheu ATUALIZAR PRODUTO.");
+                    produtoService.atualizarProduto();
                     break;
 
                 case 5:

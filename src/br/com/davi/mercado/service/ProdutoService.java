@@ -44,6 +44,45 @@ public class ProdutoService {
             System.out.println("-------------------------");
 
         }
+    }
+    public Produto buscarPorId(int id) {
+        for (int i = 0; i < quantidadeProdutos; i++) {
 
+            Produto produto = produtos[i];
+
+            if (produto.getId() == id) {
+                return produto;
+            }
+        }
+        return null;
+    }
+
+    public void atualizarProduto() {
+        System.out.println("\n=== Atualizar Produto ===");
+
+        System.out.print("Digite o ID do produto: ");
+        int id = scanner.nextInt();
+
+        Produto produto = buscarPorId(id);
+
+        if (produto != null) {
+
+            System.out.print("Novo nome: ");
+            String nome = scanner.next();
+
+            System.out.print("Novo preço: ");
+            double preco = scanner.nextDouble();
+
+            System.out.print("Nova quantidade: ");
+            int quantidade = scanner.nextInt();
+
+            produto.setNome(nome);
+            produto.setPreco(preco);
+            produto.setQuantidade(quantidade);
+            System.out.println("\nProduto atualizado com sucesso!");
+
+        } else {
+            System.out.println("\nProduto não encontrado.");
+        }
     }
 }
