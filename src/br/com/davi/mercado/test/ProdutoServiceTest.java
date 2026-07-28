@@ -8,6 +8,7 @@ public class ProdutoServiceTest {
         ProdutoService produtoService = new ProdutoService();
 
         produtoService.cadastrarProduto();
-
+        produtoService.listarProdutos();
+        produtoService.atualizarProduto();
     }
 }
