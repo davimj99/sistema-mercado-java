@@ -12,26 +12,31 @@
 
 ---
 
-## 📖 Sobre o Projeto
+# 📖 Sobre o Projeto
 
-O **Mini Mercado Java** é um projeto desenvolvido com o objetivo de praticar os principais conceitos da linguagem Java e Programação Orientada a Objetos (POO).
+O **Mini Mercado Java** é um projeto desenvolvido com o objetivo de praticar e consolidar os principais conceitos da linguagem Java e Programação Orientada a Objetos (POO).
 
-A ideia é evoluir o sistema gradativamente, desde uma aplicação simples via terminal até uma aplicação completa, aplicando boas práticas de desenvolvimento, arquitetura de software e versionamento com Git.
+O projeto começou como uma aplicação simples executada via terminal e será evoluído gradativamente para um sistema completo, aplicando boas práticas de desenvolvimento, organização de código, arquitetura de software e versionamento com Git.
+
+A proposta é simular um sistema de gerenciamento de um pequeno mercado, permitindo a evolução desde conceitos básicos da linguagem até conceitos avançados utilizados no mercado de trabalho.
 
 ---
 
-## 🎯 Objetivos
+# 🎯 Objetivos
 
 - Aprender Java na prática
 - Aplicar Programação Orientada a Objetos
-- Evoluir um projeto real do zero
-- Utilizar Git Flow
-- Desenvolver boas práticas de código
+- Desenvolver lógica de programação
+- Criar um projeto real do zero
+- Praticar organização de código
+- Utilizar Git e GitHub
+- Trabalhar com branches e Pull Requests
+- Desenvolver boas práticas de programação
 - Criar um projeto para portfólio
 
 ---
 
-# 🚀 Tecnologias
+# 🚀 Tecnologias Utilizadas
 
 - ☕ Java
 - 💻 IntelliJ IDEA
@@ -40,7 +45,7 @@ A ideia é evoluir o sistema gradativamente, desde uma aplicação simples via t
 
 ---
 
-# 📂 Estrutura do Projeto Até o Momento
+# 📂 Estrutura Atual do Projeto
 
 ```text
 src
@@ -48,33 +53,71 @@ src
     └── com
         └── davi
             └── mercado
+                │
                 ├── dominio
-                ├── repository
+                │   └── Produto.java
+                │
                 ├── service
+                │   └── ProdutoService.java
+                │
+                ├── repository
+                │
                 ├── test
+                │
                 └── Main.java
+```
+
+---
+
+# 🏗️ Arquitetura
+
+O projeto segue uma organização inicial baseada na separação de responsabilidades.
+
+```text
+Main
+│
+├── Interação com usuário
+│
+▼
+ProdutoService
+│
+├── Cadastro de produtos
+├── Listagem de produtos
+├── Busca de produtos
+└── Atualização de produtos
+│
+▼
+Produto
+│
+└── Representa o objeto de domínio
 ```
 
 ---
 
 # ✅ Funcionalidades
 
-### Implementadas
+## Implementadas
 
 - [x] Cadastro de produtos
 - [x] Listagem de produtos
-- [x] Busca de produtos
-- [x] Menu interativo
+- [x] Busca de produtos por ID
+- [x] Atualização de produtos por ID
+- [x] Menu interativo no terminal
+- [x] Organização inicial em pacotes
+- [x] Encapsulamento utilizando getters e setters
+- [x] Criação de objetos utilizando construtores
+- [x] Manipulação de arrays de objetos
 
 ---
 
-### Em desenvolvimento
+## 🚧 Em Desenvolvimento
 
 - [ ] Controle de estoque
-- [ ] Atualização de produtos
 - [ ] Remoção de produtos
-- [ ] Categorias
+- [ ] Categorias de produtos
 - [ ] Validação de dados
+- [ ] Tratamento de exceções
+- [ ] Melhorias na arquitetura
 - [ ] Persistência em arquivos
 - [ ] Persistência em banco de dados
 - [ ] Sistema de vendas
@@ -88,6 +131,7 @@ src
 | Conceito | Status |
 |----------|--------|
 | Variáveis | ✅ |
+| Tipos Primitivos | ✅ |
 | Operadores | ✅ |
 | Estruturas Condicionais | ✅ |
 | Estruturas de Repetição | ✅ |
@@ -96,71 +140,133 @@ src
 | Classes | ✅ |
 | Objetos | ✅ |
 | Encapsulamento | ✅ |
-| Associação | 🚧 |
-| Herança | ⏳ |
+| Getters e Setters | ✅ |
+| Associação | ✅ |
+| Arrays de Objetos | ✅ |
+| Construtores | ✅ |
+| Herança | 🚧 |
 | Polimorfismo | ⏳ |
+| Classes Abstratas | ⏳ |
 | Interfaces | ⏳ |
 | Exceptions | ⏳ |
 | Collections | ⏳ |
 | Generics | ⏳ |
 | JDBC | ⏳ |
+| API REST | ⏳ |
 
 ---
 
 # 🗺️ Roadmap
 
-## ✅ Versão 1.0
+## ✅ Versão 1.0 - Cadastro de Produtos
 
 - Cadastro de produtos
-- Busca
-- Atualização
-- Remoção
+- Listagem de produtos
+- Busca por ID
+- Atualização por ID
+- Remoção de produtos
 
-## 🚧 Versão 2.0
+---
+
+## 🚧 Versão 2.0 - Regras de Negócio
 
 - Controle de estoque
 - Organização em camadas
-- Exceptions
+- Melhor separação de responsabilidades
+- Herança
+- Polimorfismo
+- Tratamento de exceções
 
-## ⏳ Versão 3.0
+---
+
+## ⏳ Versão 3.0 - Persistência
 
 - Persistência em arquivos
+- Leitura e gravação de dados
+- Organização de dados
 
-## ⏳ Versão 4.0
+---
 
-- Banco de Dados (JDBC)
+## ⏳ Versão 4.0 - Banco de Dados
 
-## ⏳ Versão 5.0
+- JDBC
+- Integração com banco de dados
+- CRUD completo
+- Consultas SQL
 
-- API REST
+---
+
+## ⏳ Versão 5.0 - API REST
+
+- Spring Boot
+- Desenvolvimento de API REST
+- Banco de dados relacional
+- Arquitetura profissional
 
 ---
 
 # 🌿 Git Flow
 
+O projeto utiliza um fluxo baseado em branches para organizar o desenvolvimento.
+
+Estrutura atual:
+
 ```text
 main
 │
-├── feature/produto
-├── feature/README
+├── feature/Produto
+│
+└── feature/README
 ```
 
-# 📈 Evolução
+Fluxo de desenvolvimento:
 
-Este projeto será desenvolvido conforme meu aprendizado em Java.
-
-Cada funcionalidade será criada em sua própria branch e integrada através de Pull Requests.
+```text
+feature/*
+    │
+    ▼
+Desenvolvimento
+    │
+    ▼
+Commit
+    │
+    ▼
+Push
+    │
+    ▼
+Pull Request
+    │
+    ▼
+Merge
+    │
+    ▼
+main
+```
 
 ---
 
-# 📊 Progresso
+# 📈 Evolução
+
+Este projeto acompanha minha evolução no aprendizado de Java.
+
+Cada funcionalidade é desenvolvida separadamente e integrada ao projeto principal conforme o aprendizado avança.
+
+O objetivo é transformar uma aplicação simples de terminal em um sistema completo, aplicando conceitos utilizados no desenvolvimento profissional.
+
+---
+
+# 📊 Progresso Atual
 
 ```text
 Java Básico        ████████████████░░░░ 80%
 
-POO                ████████░░░░░░░░░░░░ 40%
+POO                ██████████░░░░░░░░░░ 50%
+
+Herança            ███░░░░░░░░░░░░░░░░░ 15%
 
 Collections        ░░░░░░░░░░░░░░░░░░░░ 0%
+
+Banco de Dados     ░░░░░░░░░░░░░░░░░░░░ 0%
 
 JDBC               ░░░░░░░░░░░░░░░░░░░░ 0%
 
@@ -171,9 +277,9 @@ API REST           ░░░░░░░░░░░░░░░░░░░░ 
 
 # 🤝 Contribuição
 
-Este é um projeto de estudos, mas sugestões e melhorias são sempre bem-vindas.
+Este é um projeto de estudos e evolução pessoal.
 
----
+Sugestões e melhorias são sempre bem-vindas.
 
 ---
 
@@ -181,9 +287,9 @@ Este é um projeto de estudos, mas sugestões e melhorias são sempre bem-vindas
 
 <div align="center">
 
-### Davi Souza
+## Davi Souza
 
-Back-end Developer.
+Back-end Developer
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Davi%20Souza-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/davisouza99/)
 
