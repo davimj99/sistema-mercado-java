@@ -57,21 +57,42 @@ src
 
 ---
 
+# 🏗️ Arquitetura
+
+O projeto está organizado seguindo a separação de responsabilidades.
+
+```text
+Main
+│
+├── interação com o usuário
+│
+▼
+ProdutoService
+│
+├── cadastro
+├── listagem
+├── busca
+└── atualização
+│
+▼
+Produto
+```
+
+---
+
 # ✅ Funcionalidades
 
 ### Implementadas
 
 - [x] Cadastro de produtos
 - [x] Listagem de produtos
-- [x] Busca de produtos
+- [x] Busca de produtos por ID
+- [x] Atualização de produtos por ID
 - [x] Menu interativo
-
----
 
 ### Em desenvolvimento
 
 - [ ] Controle de estoque
-- [ ] Atualização de produtos
 - [ ] Remoção de produtos
 - [ ] Categorias
 - [ ] Validação de dados
@@ -96,7 +117,9 @@ src
 | Classes | ✅ |
 | Objetos | ✅ |
 | Encapsulamento | ✅ |
-| Associação | 🚧 |
+| Associação | ✅ |
+| Arrays de Objetos | ✅ |
+| Construtores | ✅ |
 | Herança | ⏳ |
 | Polimorfismo | ⏳ |
 | Interfaces | ⏳ |
@@ -112,15 +135,16 @@ src
 ## ✅ Versão 1.0
 
 - Cadastro de produtos
-- Busca
-- Atualização
-- Remoção
+- Listagem de produtos
+- Busca por ID
+- Atualização por ID
+- Remoção de produtos
 
 ## 🚧 Versão 2.0
 
 - Controle de estoque
 - Organização em camadas
-- Exceptions
+- Herança
 
 ## ⏳ Versão 3.0
 
@@ -138,12 +162,40 @@ src
 
 # 🌿 Git Flow
 
+Atualmente o projeto utiliza o seguinte fluxo de branches:
+
 ```text
 main
 │
-├── feature/produto
-├── feature/README
+├── feature/Produto
+└── feature/README
 ```
+
+Fluxo de desenvolvimento:
+
+```text
+feature/*
+    │
+    ▼
+Desenvolvimento
+    │
+    ▼
+Commit
+    │
+    ▼
+Push
+    │
+    ▼
+Pull Request
+    │
+    ▼
+Merge (Squash)
+    │
+    ▼
+main
+```
+
+---
 
 # 📈 Evolução
 
@@ -158,13 +210,9 @@ Cada funcionalidade será criada em sua própria branch e integrada através de 
 ```text
 Java Básico        ████████████████░░░░ 80%
 
-POO                ████████░░░░░░░░░░░░ 40%
+POO                ██████████░░░░░░░░░░ 50%
 
-Collections        ░░░░░░░░░░░░░░░░░░░░ 0%
-
-JDBC               ░░░░░░░░░░░░░░░░░░░░ 0%
-
-API REST           ░░░░░░░░░░░░░░░░░░░░ 0%
+Herança            ███░░░░░░░░░░░░░░░░░ 15%
 ```
 
 ---
@@ -172,8 +220,6 @@ API REST           ░░░░░░░░░░░░░░░░░░░░ 
 # 🤝 Contribuição
 
 Este é um projeto de estudos, mas sugestões e melhorias são sempre bem-vindas.
-
----
 
 ---
 
