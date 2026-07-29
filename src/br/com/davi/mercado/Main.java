@@ -67,7 +67,9 @@ public class Main {
                     break;
 
                 case 5:
-                    System.out.println("\n>> Você escolheu REMOVER PRODUTO.");
+                    System.out.print("Digite o ID do produto que deseja excluir: ");
+                    int idExcluir = scanner.nextInt();
+                    produtoService.excluirProduto(idExcluir);
                     break;
 
                 case 0:
