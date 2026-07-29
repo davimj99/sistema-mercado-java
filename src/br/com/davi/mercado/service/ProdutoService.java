@@ -85,4 +85,23 @@ public class ProdutoService {
             System.out.println("\nProduto não encontrado.");
         }
     }
+
+    public void excluirProduto(int id) {
+        for (int i = 0; i < quantidadeProdutos; i++) {
+            if (produtos[i].getId() == id) {
+
+                for (int j = i; j < quantidadeProdutos - 1; j++) {
+                    produtos[j] = produtos[j + 1];
+                }
+
+                produtos[quantidadeProdutos - 1] = null;
+
+                quantidadeProdutos--;
+                System.out.println("Produto removido com sucesso!");
+                return;
+            }
+        }
+
+        System.out.println("Produto não encontrado.");
+    }
 }
