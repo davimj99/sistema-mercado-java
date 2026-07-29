@@ -14,11 +14,53 @@
 
 # 📖 Sobre o Projeto
 
-O **Mini Mercado Java** é um projeto desenvolvido com o objetivo de praticar e consolidar os principais conceitos da linguagem Java e Programação Orientada a Objetos (POO).
+O **Mini Mercado Java** é um projeto desenvolvido com o objetivo de praticar e consolidar os principais conceitos da linguagem Java e da Programação Orientada a Objetos (POO).
 
-O projeto começou como uma aplicação simples executada via terminal e será evoluído gradativamente para um sistema completo, aplicando boas práticas de desenvolvimento, organização de código, arquitetura de software e versionamento com Git.
+O sistema foi desenvolvido inicialmente como uma aplicação de terminal e está sendo evoluído gradativamente para um projeto mais completo, seguindo boas práticas de desenvolvimento, organização de código, arquitetura de software e versionamento com Git.
 
-A proposta é simular um sistema de gerenciamento de um pequeno mercado, permitindo a evolução desde conceitos básicos da linguagem até conceitos avançados utilizados no mercado de trabalho.
+Além de praticar Java, este projeto documenta minha evolução durante os estudos.
+
+---
+
+# 📸 Demonstração
+
+## ➕ Cadastro de Produto
+
+<p align="center">
+<img src="images_readme/Cadastro_Produtos.png" width="700">
+</p>
+
+---
+
+## 📋 Listagem de Produtos
+
+<p align="center">
+<img src="images_readme/Listar_Produtos.png" width="700">
+</p>
+
+---
+
+## 🔍 Busca por ID
+
+<p align="center">
+<img src="images_readme/Buscar_Produtos.png" width="700">
+</p>
+
+---
+
+## ✏️ Atualização de Produto
+
+<p align="center">
+<img src="images_readme/Atualizar_Produtos.png" width="700">
+</p>
+
+---
+
+## ❌ Exclusão de Produto
+
+<p align="center">
+<img src="images_readme/Remover_Produtos.png" width="700">
+</p>
 
 ---
 
@@ -27,12 +69,10 @@ A proposta é simular um sistema de gerenciamento de um pequeno mercado, permiti
 - Aprender Java na prática
 - Aplicar Programação Orientada a Objetos
 - Desenvolver lógica de programação
-- Criar um projeto real do zero
-- Praticar organização de código
-- Utilizar Git e GitHub
-- Trabalhar com branches e Pull Requests
-- Desenvolver boas práticas de programação
-- Criar um projeto para portfólio
+- Criar um projeto do zero
+- Praticar boas práticas de desenvolvimento
+- Evoluir continuamente o projeto
+- Utilizar Git e GitHub profissionalmente
 
 ---
 
@@ -45,7 +85,31 @@ A proposta é simular um sistema de gerenciamento de um pequeno mercado, permiti
 
 ---
 
-# 📂 Estrutura Atual do Projeto
+# ▶️ Como Executar
+
+Clone o repositório
+
+```bash
+git clone https://github.com/davimj99/MercadoJava.git
+```
+
+Entre na pasta
+
+```bash
+cd MercadoJava
+```
+
+Abra o projeto no IntelliJ IDEA.
+
+Execute a classe:
+
+```text
+Main.java
+```
+
+---
+
+# 📂 Estrutura do Projeto
 
 ```text
 src
@@ -71,8 +135,6 @@ src
 
 # 🏗️ Arquitetura
 
-O projeto segue uma organização inicial baseada na separação de responsabilidades.
-
 ```text
 Main
 │
@@ -81,48 +143,46 @@ Main
 ▼
 ProdutoService
 │
-├── Cadastro de produtos
-├── Listagem de produtos
-├── Busca de produtos
-└── Atualização de produtos
+├── Cadastro
+├── Listagem
+├── Busca
+├── Atualização
+└── Exclusão
 │
 ▼
 Produto
-│
-└── Representa o objeto de domínio
 ```
 
 ---
 
 # ✅ Funcionalidades
 
-## Implementadas
-
-- [x] Cadastro de produtos
-- [x] Listagem de produtos
-- [x] Busca de produtos por ID
-- [x] Atualização de produtos por ID
-- [x] Menu interativo no terminal
-- [x] Organização inicial em pacotes
-- [x] Encapsulamento utilizando getters e setters
-- [x] Criação de objetos utilizando construtores
-- [x] Manipulação de arrays de objetos
+- ✔ Cadastro de produtos
+- ✔ Listagem de produtos
+- ✔ Busca por ID
+- ✔ Atualização de produtos
+- ✔ Exclusão de produtos
+- ✔ Menu interativo
+- ✔ Encapsulamento
+- ✔ Arrays de Objetos
+- ✔ Organização em pacotes
 
 ---
 
-## 🚧 Em Desenvolvimento
+# 🚧 Próximas Melhorias
 
-- [ ] Controle de estoque
-- [ ] Remoção de produtos
-- [ ] Categorias de produtos
-- [ ] Validação de dados
-- [ ] Tratamento de exceções
-- [ ] Melhorias na arquitetura
-- [ ] Persistência em arquivos
-- [ ] Persistência em banco de dados
-- [ ] Sistema de vendas
-- [ ] Relatórios
-- [ ] Testes unitários
+- Controle de estoque
+- Categorias de produtos
+- Validação de dados
+- Tratamento de exceções
+- Collections
+- Persistência em arquivos
+- Banco de dados com JDBC
+- Sistema de vendas
+- Relatórios
+- Testes unitários
+- Spring Boot
+- API REST
 
 ---
 
@@ -156,59 +216,67 @@ Produto
 
 ---
 
+# 📖 Aprendizados
+
+Durante o desenvolvimento deste projeto pratiquei:
+
+- Programação Orientada a Objetos
+- Encapsulamento
+- Construtores
+- Arrays de Objetos
+- Organização em camadas
+- Git Flow
+- Pull Requests
+- Conventional Commits
+- Documentação de projetos com README
+
+---
+
 # 🗺️ Roadmap
 
-## ✅ Versão 1.0 - Cadastro de Produtos
+## ✅ Versão 1.0
 
 - Cadastro de produtos
 - Listagem de produtos
 - Busca por ID
 - Atualização por ID
 - Remoção de produtos
+**Status:** ✅ Concluído
 
 ---
 
-## 🚧 Versão 2.0 - Regras de Negócio
+## 🚧 Versão 2.0
 
 - Controle de estoque
-- Organização em camadas
-- Melhor separação de responsabilidades
-- Herança
-- Polimorfismo
-- Tratamento de exceções
+- Exceptions
+- Collections
+- Melhor organização em camadas
 
 ---
 
-## ⏳ Versão 3.0 - Persistência
+## ⏳ Versão 3.0
 
 - Persistência em arquivos
-- Leitura e gravação de dados
-- Organização de dados
 
 ---
 
-## ⏳ Versão 4.0 - Banco de Dados
+## ⏳ Versão 4.0
 
 - JDBC
-- Integração com banco de dados
-- CRUD completo
-- Consultas SQL
+- Banco de dados relacional
 
 ---
 
-## ⏳ Versão 5.0 - API REST
+## ⏳ Versão 5.0
 
 - Spring Boot
-- Desenvolvimento de API REST
-- Banco de dados relacional
-- Arquitetura profissional
+- API REST
 
 ---
 
 # 🌿 Git Flow
 
 O projeto utiliza um fluxo baseado em branches para organizar o desenvolvimento.
-
 Estrutura atual:
 
 ```text
@@ -217,69 +285,50 @@ main
 ├── feature/Produto
 │
 └── feature/README
+└── Release v1.0.0
 ```
 
-Fluxo de desenvolvimento:
+Fluxo utilizado:
 
 ```text
 feature/*
-    │
-    ▼
-Desenvolvimento
-    │
-    ▼
-Commit
-    │
-    ▼
-Push
-    │
-    ▼
-Pull Request
-    │
-    ▼
-Merge
-    │
-    ▼
-main
+      │
+      ▼
+ Desenvolvimento
+      │
+      ▼
+ Conventional Commit
+      │
+      ▼
+ Push
+      │
+      ▼
+ Pull Request
+      │
+      ▼
+ Squash Merge
+      │
+      ▼
+ main
 ```
 
 ---
 
 # 📈 Evolução
 
-Este projeto acompanha minha evolução no aprendizado de Java.
+Este projeto acompanha minha evolução durante os estudos de Java.
 
-Cada funcionalidade é desenvolvida separadamente e integrada ao projeto principal conforme o aprendizado avança.
+Cada nova funcionalidade é desenvolvida em uma branch específica, revisada através de Pull Request e integrada ao projeto principal utilizando Git Flow.
 
-O objetivo é transformar uma aplicação simples de terminal em um sistema completo, aplicando conceitos utilizados no desenvolvimento profissional.
-
----
-
-# 📊 Progresso Atual
-
-```text
-Java Básico        ████████████████░░░░ 80%
-
-POO                ██████████░░░░░░░░░░ 50%
-
-Herança            ███░░░░░░░░░░░░░░░░░ 15%
-
-Collections        ░░░░░░░░░░░░░░░░░░░░ 0%
-
-Banco de Dados     ░░░░░░░░░░░░░░░░░░░░ 0%
-
-JDBC               ░░░░░░░░░░░░░░░░░░░░ 0%
-
-API REST           ░░░░░░░░░░░░░░░░░░░░ 0%
-```
+O objetivo é evoluir esta aplicação de terminal para uma aplicação completa utilizando banco de dados, Spring Boot e API REST.
 
 ---
 
 # 🤝 Contribuição
 
-Este é um projeto de estudos e evolução pessoal.
+Este é um projeto de estudos.
 
-Sugestões e melhorias são sempre bem-vindas.
+Sugestões, melhorias e feedbacks são sempre bem-vindos.
 
 ---
 
@@ -301,6 +350,6 @@ Back-end Developer
 
 <p align="center">
 
-⭐ Se este projeto foi útil ou você gostou da evolução, considere deixar uma estrela no repositório!
+⭐ Se gostou do projeto, considere deixar uma estrela no repositório!
 
 </p>
