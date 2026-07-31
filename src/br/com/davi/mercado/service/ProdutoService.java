@@ -24,12 +24,30 @@ public class ProdutoService {
             System.out.println("Erro: ID " + id + " já cadastrado. \n Tente outro ID.");
         }
 
-        System.out.println("Nome: ");
-        String nome = scanner.nextLine();
+        String nome;
+        while (true){
+            System.out.println("Nome: ");
+            nome = scanner.nextLine();
 
-        System.out.println("Preço: ");
-        double preco = scanner.nextDouble();
+            if(nome.isBlank()){
+                System.out.println("Erro: O nome do produto não pode estar vazio.");
+            }else{
+                break;
+            }
+        }
 
+        double preco;
+        while (true){
+        System.out.print("Preço: ");
+        preco = scanner.nextDouble();
+
+        if(preco > 0){
+            break;
+
+            }else {
+            System.out.println("Preço inválido! Digite um valor maior que zero. ");
+            }
+        }
         System.out.println("Quantidade: ");
         int quantidade = scanner.nextInt();
         scanner.nextLine();
