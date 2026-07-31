@@ -38,19 +38,30 @@ public class ProdutoService {
 
         double preco;
         while (true){
-        System.out.print("Preço: ");
-        preco = scanner.nextDouble();
+            System.out.print("Preço: ");
+            preco = scanner.nextDouble();
 
-        if(preco > 0){
-            break;
+            if(preco > 0){
+                break;
 
             }else {
-            System.out.println("Preço inválido! Digite um valor maior que zero. ");
+                System.out.println("Preço inválido! Digite um valor maior que zero. ");
             }
         }
-        System.out.println("Quantidade: ");
-        int quantidade = scanner.nextInt();
-        scanner.nextLine();
+
+        int quantidade;
+        while (true){
+            System.out.println("Quantidade: ");
+            quantidade = scanner.nextInt();
+            scanner.nextLine();
+
+            if(quantidade > 0){
+            break;
+
+            }else{
+                System.out.println("Quantidade inválida! Digite um valor maior que zero.");
+            }
+        }
 
         Produto produto = new Produto(id, nome, preco, quantidade);
         produtos[quantidadeProdutos] = produto;
