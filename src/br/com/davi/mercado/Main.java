@@ -10,7 +10,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         ProdutoService produtoService = new ProdutoService();
 
-
         String[] menu = {
                 "1 - Cadastrar Produto",
                 "2 - Listar Produtos",
@@ -48,6 +47,7 @@ public class Main {
                 case 3:
                     System.out.print("Digite o ID do produto: ");
                     int id = scanner.nextInt();
+                    scanner.nextLine();
 
                     Produto produto = produtoService.buscarPorId(id);
 

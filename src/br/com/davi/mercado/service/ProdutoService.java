@@ -12,18 +12,27 @@ public class ProdutoService {
 
     public void cadastrarProduto(){
         System.out.println("Cadastrando produto...");
+        int id;
+        while (true) {
+            System.out.println("ID: ");
+            id = scanner.nextInt();
+            scanner.nextLine();
 
-        System.out.println("ID: ");
-        int id = scanner.nextInt();
+            if(buscarPorId(id) == null){
+                break;
+            }
+            System.out.println("Erro: ID " + id + " já cadastrado. \n Tente outro ID.");
+        }
 
         System.out.println("Nome: ");
-        String nome = scanner.next();
+        String nome = scanner.nextLine();
 
         System.out.println("Preço: ");
         double preco = scanner.nextDouble();
 
         System.out.println("Quantidade: ");
         int quantidade = scanner.nextInt();
+        scanner.nextLine();
 
         Produto produto = new Produto(id, nome, preco, quantidade);
         produtos[quantidadeProdutos] = produto;
@@ -69,12 +78,15 @@ public class ProdutoService {
 
             System.out.print("Novo nome: ");
             String nome = scanner.next();
+            scanner.nextLine();
 
             System.out.print("Novo preço: ");
             double preco = scanner.nextDouble();
+            scanner.nextLine();
 
             System.out.print("Nova quantidade: ");
             int quantidade = scanner.nextInt();
+            scanner.nextLine();
 
             produto.setNome(nome);
             produto.setPreco(preco);
