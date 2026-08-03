@@ -14,7 +14,7 @@ public class Entrada {
                 scanner.nextLine();
 
                 if (valor < min || valor > max) {
-                    System.out.println("Digite um valor entre " + min + " e " + max);
+                    System.out.println("Digite um valor que está disponivel no menu " + min + " a " + max);
                     continue;
                 }
                 return valor;
