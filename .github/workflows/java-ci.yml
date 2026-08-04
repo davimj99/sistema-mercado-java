@@ -1,0 +1,36 @@
+name: Java CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - "release/**"
+
+  pull_request:
+    branches:
+      - main
+      - "release/**"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Baixar código
+        uses: actions/checkout@v5
+
+      - name: Configurar Java
+        uses: actions/setup-java@v5
+        with:
+          java-version: '26'
+          distribution: 'temurin'
+
+      - name: Verificar versão Java
+        run: java -version
+
+      - name: Compilar projeto
+        run: |
+          mkdir out
+          javac -d out $(find src -name "*.java")

@@ -1,16 +1,19 @@
 package br.com.davi.mercado;
 import br.com.davi.mercado.dominio.Produto;
 import br.com.davi.mercado.service.ProdutoService;
+import br.com.davi.mercado.util.Entrada;
+import br.com.davi.mercado.exception.ProdutoNaoEncontradoException;
+import br.com.davi.mercado.exception.ProdutoInvalidoException;
 import java.util.Scanner;
 
 public class Main {
-
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
         ProdutoService produtoService = new ProdutoService();
 
         String[] menu = {
+
                 "1 - Cadastrar Produto",
                 "2 - Listar Produtos",
                 "3 - Buscar Produto",
@@ -20,24 +23,24 @@ public class Main {
         };
         int opcao;
 
-        // O menu ficará repetindo até o usuário escolher 0
         do {
-
             System.out.println("\n==========================");
             System.out.println("      MERCADO JAVA");
             System.out.println("==========================");
 
-            for (int i = 0; i < menu.length; i++) {
-                System.out.println(menu[i]);
+            for (String item : menu) {
+                System.out.println(item);
             }
 
-            System.out.print("\nEscolha uma opção: ");
-            opcao = scanner.nextInt();
+            opcao = Entrada.lerInteiro(scanner, "Escolha uma opção: ", 0, 5);
 
             switch (opcao) {
-
                 case 1:
-                    produtoService.cadastrarProduto();
+                    try {
+                        produtoService.cadastrarProduto();
+                    } catch (ProdutoInvalidoException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
 
                 case 2:
@@ -45,31 +48,38 @@ public class Main {
                     break;
 
                 case 3:
-                    System.out.print("Digite o ID do produto: ");
-                    int id = scanner.nextInt();
-                    scanner.nextLine();
+                    try {
+                        int id = Entrada.lerInteiro(scanner, "Digite o ID: ", 1, Integer.MAX_VALUE);
 
-                    Produto produto = produtoService.buscarPorId(id);
+                        Produto produto = produtoService.buscarPorId(id);
 
-                    if (produto != null) {
                         System.out.println("\nProduto encontrado!");
                         System.out.println("ID: " + produto.getId());
                         System.out.println("Nome: " + produto.getNome());
                         System.out.println("Preço: " + produto.getPreco());
                         System.out.println("Quantidade: " + produto.getQuantidade());
-                    } else {
-                        System.out.println("Produto não encontrado.");
+
+
+                    } catch (ProdutoNaoEncontradoException e) {
+                        System.out.println(e.getMessage());
                     }
                     break;
 
                 case 4:
-                    produtoService.atualizarProduto();
+                    try {
+                        produtoService.atualizarProduto();
+                    } catch (ProdutoNaoEncontradoException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
 
                 case 5:
-                    System.out.print("Digite o ID do produto que deseja excluir: ");
-                    int idExcluir = scanner.nextInt();
-                    produtoService.excluirProduto(idExcluir);
+                    try {
+                        int idExcluir = Entrada.lerInteiro(scanner, "Digite o ID do produto: ", 1, Integer.MAX_VALUE);
+                        produtoService.excluirProduto(idExcluir);
+                    } catch (ProdutoNaoEncontradoException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
 
                 case 0:
@@ -77,12 +87,10 @@ public class Main {
                     System.out.println("Sistema encerrado.");
                     break;
 
-                default:
-                    System.out.println("\nOpção inválida! Tente novamente.");
+                    default:
+                    System.out.println("Opção inválida.");
             }
-
-        } while (opcao != 0);
-
+        } while(opcao != 0);
         scanner.close();
     }
 }
