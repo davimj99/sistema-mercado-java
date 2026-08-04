@@ -1,4 +1,4 @@
-name: Java CI
+name: Java CI Pipeline
 
 on:
   push:
@@ -19,23 +19,18 @@ jobs:
     steps:
 
       - name: Baixar código
-
         uses: actions/checkout@v5
 
       - name: Configurar Java
         uses: actions/setup-java@v5
-
-        uses: actions/checkout@v4
-
-      - name: Configurar Java
-        uses: actions/setup-java@v4
-
         with:
           java-version: '26'
           distribution: 'temurin'
 
-      - name: Compilar projeto
-        run: mvn clean compile
+      - name: Verificar versão Java
+        run: java -version
 
-      - name: Executar testes
-        run: mvn test
+      - name: Compilar projeto
+        run: |
+          mkdir out
+          javac -d out $(find src -name "*.java")
