@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class ProdutoService {
 
-    private Produto[] produtos = new Produto[100];
+    private final Produto[] produtos = new Produto[100];
     private int quantidadeProdutos = 0;
     private final Scanner scanner = new Scanner(System.in);
 
@@ -34,9 +34,19 @@ public class ProdutoService {
             throw new ProdutoInvalidoException("A quantidade não pode ser negativa.");
         }
     }
-    //fim dos métodos
+
+    private void validarCapacidade() {
+        if (quantidadeProdutos >= produtos.length) {
+            throw new ProdutoInvalidoException("Limite de produtos atingido.");
+        }
+    }
+
+    public int totalProdutos() {
+        return quantidadeProdutos;
+    }
 
     public void cadastrarProduto() {
+        validarCapacidade();
         System.out.println("Cadastrando produto...");
         int id;
         while (true) {
@@ -92,15 +102,21 @@ public class ProdutoService {
 
 
     public void listarProdutos() {
-        System.out.println("Quantidade de produtos cadastrados: " + quantidadeProdutos);
+        if (quantidadeProdutos == 0 ){
+            System.out.println("Nenhum Produto Cadastrado");
+            return;
+        }
+        System.out.println("\n=== Lista de Produtos ===");
+
         for (int i = 0; i < quantidadeProdutos; i++) {
             Produto produto = produtos[i];
             System.out.println("ID: " + produto.getId());
             System.out.println("Nome: " + produto.getNome());
-            System.out.println("Preço: " + produto.getPreco());
+            System.out.println("Preço:R$  " + produto.getPreco());
             System.out.println("Quantidade: " + produto.getQuantidade());
             System.out.println("-------------------------");
         }
+        System.out.println("Total de produtos: " + quantidadeProdutos);
     }
 
     public Produto buscarPorId(int id) {
@@ -119,7 +135,7 @@ public class ProdutoService {
         Produto produto = buscarPorId(id);
 
         String nome;
-        while(true) {
+        while (true) {
             nome = Entrada.lerString(scanner, "Novo Nome: ");
             try {
                 validarNome(nome);
@@ -130,25 +146,25 @@ public class ProdutoService {
         }
 
         double preco;
-        while(true) {
+        while (true) {
             preco = Entrada.lerDouble(scanner, "Novo Preço:");
             try {
                 validarPreco(preco);
                 break;
-            } catch (ProdutoInvalidoException e ){
+            } catch (ProdutoInvalidoException e) {
                 System.out.println(e.getMessage());
             }
         }
 
         int quantidade;
-        while(true) {
-         quantidade =  Entrada.lerInteiro(scanner, "Nova quantidade: ", 0, Integer.MAX_VALUE);
-         try {
-             validarQuantidade(quantidade);
-             break;
-         }catch (ProdutoInvalidoException e) {
-             System.out.println(e.getMessage());
-             }
+        while (true) {
+            quantidade = Entrada.lerInteiro(scanner, "Nova quantidade: ", 0, Integer.MAX_VALUE);
+            try {
+                validarQuantidade(quantidade);
+                break;
+            } catch (ProdutoInvalidoException e) {
+                System.out.println(e.getMessage());
+            }
         }
 
         produto.setNome(nome);
@@ -158,16 +174,19 @@ public class ProdutoService {
     }
 
     public void excluirProduto(int id) {
-        Produto produto = buscarPorId(id);
-
         for (int i = 0; i < quantidadeProdutos; i++) {
-            if (produtos[i].equals(produto)) {
-                for (int j = i; j < quantidadeProdutos - 1; j++) {produtos[j] = produtos[j + 1];}
+            if (produtos[i].getId() == id) {
+                for (int j = i; j < quantidadeProdutos - 1; j++) {
+                    produtos[j] = produtos[j + 1];
+                }
+
                 produtos[quantidadeProdutos - 1] = null;
                 quantidadeProdutos--;
+
                 System.out.println("Produto removido com sucesso!");
                 return;
             }
         }
+        throw new ProdutoNaoEncontradoException("Produto com ID " + id + " não encontrado.");
     }
 }
