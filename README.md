@@ -2,7 +2,7 @@
 
 <p align="center">
 
-![Java](https://img.shields.io/badge/Java-8%2B-orange?style=for-the-badge&logo=openjdk)
+![Java](https://img.shields.io/badge/Java-26-orange?style=for-the-badge&logo=openjdk)
 ![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow?style=for-the-badge)
 ![Git](https://img.shields.io/badge/Git-Versionamento-F05032?style=for-the-badge&logo=git&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-Repositório-181717?style=for-the-badge&logo=github)
@@ -121,13 +121,22 @@ src
                 ├── dominio
                 │   └── Produto.java
                 │
+                │── exception
+                │   ├── ProdutoInvalidoException.java
+                │   └── ProdutoNaoEncontradoException.java
+                │
                 ├── service
                 │   └── ProdutoService.java
                 │
                 ├── repository
                 │
                 ├── test
+                │    ├── ProdutoServiceTest.java
+                │    └── ProdutoTest.java
                 │
+                ├── util
+                    └── Entrada.java
+                │   
                 └── Main.java
 ```
 
@@ -147,7 +156,25 @@ ProdutoService
 ├── Listagem
 ├── Busca
 ├── Atualização
-└── Exclusão
+├── Exclusão
+│
+├── Utilização de Entrada
+│
+▼
+Util
+│
+└── Entrada
+│
+├── Leitura de String
+├── Leitura de Inteiros
+├── Leitura de Decimais
+└── Validação de entradas
+│
+▼
+Validações
+│
+├── ProdutoInvalidoException
+└── ProdutoNaoEncontradoException
 │
 ▼
 Produto
@@ -166,6 +193,12 @@ Produto
 - ✔ Encapsulamento
 - ✔ Arrays de Objetos
 - ✔ Organização em pacotes
+- ✔ Validação de dados
+- ✔ Tratamento de exceções personalizadas
+- ✔ Controle de erros de entrada
+- ✔ Validação de IDs duplicados
+- ✔ Validação de preço e quantidade
+- ✔ Integração Contínua (CI) com GitHub Actions
 
 ---
 
@@ -173,8 +206,6 @@ Produto
 
 - Controle de estoque
 - Categorias de produtos
-- Validação de dados
-- Tratamento de exceções
 - Collections
 - Persistência em arquivos
 - Banco de dados com JDBC
@@ -188,31 +219,33 @@ Produto
 
 # 📚 Conceitos Estudados
 
-| Conceito | Status |
-|----------|--------|
-| Variáveis | ✅ |
-| Tipos Primitivos | ✅ |
-| Operadores | ✅ |
-| Estruturas Condicionais | ✅ |
-| Estruturas de Repetição | ✅ |
-| Arrays | ✅ |
-| Métodos | ✅ |
-| Classes | ✅ |
-| Objetos | ✅ |
-| Encapsulamento | ✅ |
-| Getters e Setters | ✅ |
-| Associação | ✅ |
-| Arrays de Objetos | ✅ |
-| Construtores | ✅ |
-| Herança | 🚧 |
-| Polimorfismo | ⏳ |
-| Classes Abstratas | ⏳ |
-| Interfaces | ⏳ |
-| Exceptions | ⏳ |
-| Collections | ⏳ |
-| Generics | ⏳ |
-| JDBC | ⏳ |
-| API REST | ⏳ |
+| Conceito                 | Status |
+|--------------------------|--------|
+| Variáveis                | ✅ |
+| Tipos Primitivos         | ✅ |
+| Operadores               | ✅ |
+| Estruturas Condicionais  | ✅ |
+| Estruturas de Repetição  | ✅ |
+| Arrays                   | ✅ |
+| Métodos                  | ✅ |
+| Classes                  | ✅ |
+| Objetos                  | ✅ |
+| Encapsulamento           | ✅ |
+| Getters e Setters        | ✅ |
+| Associação               | ✅ |
+| Arrays de Objetos        | ✅ |
+| Construtores             | ✅ |
+| Exceptions               | ✅ |
+| Validação de Dados        | ✅ |
+| Integração Contínua (CI) | ✅ |
+| Herança                  | 🚧 |
+| Polimorfismo             | ⏳ |
+| Classes Abstratas        | ⏳ |
+| Interfaces               | ⏳ |
+| Collections              | ⏳ |
+| Generics                 | ⏳ |
+| JDBC                     | ⏳ |
+| API REST                 | ⏳ |
 
 ---
 
@@ -228,6 +261,8 @@ Durante o desenvolvimento deste projeto pratiquei:
 - Git Flow
 - Pull Requests
 - Conventional Commits
+- Uso de exceções 
+- Integração Contínua (CI) com GitHub Actions
 - Documentação de projetos com README
 
 ---
@@ -241,16 +276,33 @@ Durante o desenvolvimento deste projeto pratiquei:
 - Busca por ID
 - Atualização por ID
 - Remoção de produtos
-**Status:** ✅ Concluído
+
+   **Status:** ✅ Concluído
+
+## ✅ Versão 1.1
+- Tratamento de entradas do usuário
+
+    **Status:** ✅ Concluído
+
+## ✅ Versão 1.2
+
+- Tratamento de exceções
+- Validação de dados
+- Exceções personalizadas
+- Organização dos pacotes exception e util
+- GitHub Actions para integração contínua
+
+    **Status:** ✅ Concluído
 
 ---
-
 ## 🚧 Versão 2.0
 
 - Controle de estoque
-- Exceptions
 - Collections
+- Migrar arrays para ArrayList
+- Melhor gerenciamento dos produtos
 - Melhor organização em camadas
+- Testes unitários
 
 ---
 
@@ -279,15 +331,19 @@ Durante o desenvolvimento deste projeto pratiquei:
 O projeto utiliza um fluxo baseado em branches para organizar o desenvolvimento.
 Estrutura atual:
 
-```text
-main
-│
-├── feature/Produto
-│
-└── feature/README
-└── Release v1.0.0
+```text 
+---> v1.2.0
+feature/tratamento-excecoes
+            │
+            ▼
+      release/v1.2.0
+            │
+            ▼
+           main
+            │
+            ▼
+        tag: v1.2.0
 ```
-
 Fluxo utilizado:
 
 ```text
@@ -300,16 +356,22 @@ feature/*
  Conventional Commit
       │
       ▼
- Push
+ Pull Request
       │
       ▼
- Pull Request
+ GitHub Actions (CI)
       │
       ▼
  Squash Merge
       │
       ▼
- main
+ release/*
+      │
+      ▼
+ Merge para main
+      │
+      ▼
+ Tag de versão
 ```
 
 ---
@@ -318,8 +380,7 @@ feature/*
 
 Este projeto acompanha minha evolução durante os estudos de Java.
 
-Cada nova funcionalidade é desenvolvida em uma branch específica, revisada através de Pull Request e integrada ao projeto principal utilizando Git Flow.
-
+Cada nova funcionalidade é desenvolvida em uma branch específica, revisada através de Pull Request, validada automaticamente pelo GitHub Actions e integrada ao projeto principal utilizando Git Flow.
 O objetivo é evoluir esta aplicação de terminal para uma aplicação completa utilizando banco de dados, Spring Boot e API REST.
 
 ---
