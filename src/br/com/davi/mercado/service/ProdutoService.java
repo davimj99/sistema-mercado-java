@@ -23,6 +23,19 @@ public class ProdutoService {
         }
     }
 
+    private void validarPreco(double preco) {
+        if (preco <= 0) {
+            throw new ProdutoInvalidoException("O preço deve ser maior que zero.");
+        }
+    }
+
+    private void validarQuantidade(int quantidade) {
+        if (quantidade < 0) {
+            throw new ProdutoInvalidoException("A quantidade não pode ser negativa.");
+        }
+    }
+    //fim dos métodos
+
     public void cadastrarProduto() {
         System.out.println("Cadastrando produto...");
         int id;
@@ -36,7 +49,6 @@ public class ProdutoService {
                 break;
             }
         }
-
         String nome;
         while (true) {
             System.out.print("Nome: ");
@@ -53,24 +65,36 @@ public class ProdutoService {
         while (true) {
             System.out.print("Preço: ");
             preco = scanner.nextDouble();
-
-            if (preco > 0) {
+            try {
+                validarPreco(preco);
                 break;
-            } else {
-                System.out.println("Preço inválido! Digite um valor maior que zero.");
+            } catch (ProdutoInvalidoException e) {
+                System.out.println(e.getMessage());
             }
         }
 
-        System.out.println("Quantidade: ");
-        int quantidade = scanner.nextInt();
-        scanner.nextLine();
-        Produto produto = new Produto(id, nome, preco, quantidade);
+        int quantidade;
+        while (true) {
+            System.out.print("Quantidade: ");
+            quantidade = scanner.nextInt();
 
+            try {
+                validarQuantidade(quantidade);
+                break;
+            } catch (ProdutoInvalidoException e) {
+
+                System.out.println(e.getMessage());
+            }
+        }
+        scanner.nextLine();
+
+        Produto produto = new Produto(id, nome, preco, quantidade);
         produtos[quantidadeProdutos] = produto;
         quantidadeProdutos++;
         System.out.println("Produto cadastrado com sucesso!");
         System.out.println("Quantidade de produtos: " + quantidadeProdutos);
     }
+
 
     public void listarProdutos() {
         System.out.println("Quantidade de produtos cadastrados: " + quantidadeProdutos);
