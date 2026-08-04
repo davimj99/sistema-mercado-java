@@ -3,6 +3,7 @@ import br.com.davi.mercado.dominio.Produto;
 import br.com.davi.mercado.service.ProdutoService;
 import br.com.davi.mercado.util.Entrada;
 import br.com.davi.mercado.exception.ProdutoNaoEncontradoException;
+import br.com.davi.mercado.exception.ProdutoInvalidoException;
 import java.util.Scanner;
 
 public class Main {
@@ -35,7 +36,11 @@ public class Main {
 
             switch (opcao) {
                 case 1:
-                    produtoService.cadastrarProduto();
+                    try {
+                        produtoService.cadastrarProduto();
+                    } catch (ProdutoInvalidoException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
 
                 case 2:

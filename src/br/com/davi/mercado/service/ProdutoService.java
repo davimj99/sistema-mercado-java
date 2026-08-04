@@ -1,6 +1,7 @@
 package br.com.davi.mercado.service;
 
 import br.com.davi.mercado.dominio.Produto;
+import br.com.davi.mercado.exception.ProdutoInvalidoException;
 import br.com.davi.mercado.exception.ProdutoNaoEncontradoException;
 import br.com.davi.mercado.util.Entrada;
 
@@ -11,6 +12,16 @@ public class ProdutoService {
     private Produto[] produtos = new Produto[100];
     private int quantidadeProdutos = 0;
     private Scanner scanner = new Scanner(System.in);
+
+    private void validarNome(String nome) {
+        if (nome == null || nome.isBlank()) {
+            throw new ProdutoInvalidoException("O nome do produto não pode estar vazio.");
+        }
+
+        if (!nome.matches("[a-zA-ZÀ-ÿ ]+")) {
+            throw new ProdutoInvalidoException("O nome do produto deve conter apenas letras.");
+        }
+    }
 
     public void cadastrarProduto() {
         System.out.println("Cadastrando produto...");
@@ -28,13 +39,13 @@ public class ProdutoService {
 
         String nome;
         while (true) {
-            System.out.println("Nome: ");
+            System.out.print("Nome: ");
             nome = scanner.nextLine();
-            if (nome.isBlank()) {
-                System.out.println("Erro: O nome do produto não pode estar vazio."
-                );
-            } else {
+            try {
+                validarNome(nome);
                 break;
+            } catch (ProdutoInvalidoException e) {
+                System.out.println(e.getMessage());
             }
         }
 
