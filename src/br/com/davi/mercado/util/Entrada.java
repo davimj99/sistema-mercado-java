@@ -42,4 +42,10 @@ public class Entrada {
             }
         }
     }
+    public static String lerString(Scanner scanner, String mensagem) {
+
+        System.out.print(mensagem);
+
+        return scanner.nextLine();
+    }
 }

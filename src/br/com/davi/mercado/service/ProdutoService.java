@@ -11,7 +11,7 @@ public class ProdutoService {
 
     private Produto[] produtos = new Produto[100];
     private int quantidadeProdutos = 0;
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     private void validarNome(String nome) {
         if (nome == null || nome.isBlank()) {
@@ -51,8 +51,7 @@ public class ProdutoService {
         }
         String nome;
         while (true) {
-            System.out.print("Nome: ");
-            nome = scanner.nextLine();
+            nome = Entrada.lerString(scanner, "Nome: ");
             try {
                 validarNome(nome);
                 break;
@@ -74,9 +73,7 @@ public class ProdutoService {
 
         int quantidade;
         while (true) {
-            System.out.print("Quantidade: ");
-            quantidade = scanner.nextInt();
-
+            quantidade = Entrada.lerInteiro(scanner, "Quantidade: ", 0, Integer.MAX_VALUE);
             try {
                 validarQuantidade(quantidade);
                 break;
@@ -85,7 +82,6 @@ public class ProdutoService {
                 System.out.println(e.getMessage());
             }
         }
-        scanner.nextLine();
 
         Produto produto = new Produto(id, nome, preco, quantidade);
         produtos[quantidadeProdutos] = produto;
@@ -119,23 +115,42 @@ public class ProdutoService {
 
     public void atualizarProduto() {
         System.out.println("\n=== Atualizar Produto ===");
-        System.out.print("Digite o ID do produto: ");
-        int id = scanner.nextInt();
-
+        int id = Entrada.lerInteiro(scanner, "Digite o ID do produto: ", 1, Integer.MAX_VALUE);
         Produto produto = buscarPorId(id);
 
-        scanner.nextLine();
+        String nome;
+        while(true) {
+            nome = Entrada.lerString(scanner, "Novo Nome: ");
+            try {
+                validarNome(nome);
+                break;
+            } catch (ProdutoInvalidoException e) {
+                System.out.println(e.getMessage());
+            }
+        }
 
-        System.out.print("Novo nome: ");
-        String nome = scanner.nextLine();
+        double preco;
+        while(true) {
+            preco = Entrada.lerDouble(scanner, "Novo Preço:");
+            try {
+                validarPreco(preco);
+                break;
+            } catch (ProdutoInvalidoException e ){
+                System.out.println(e.getMessage());
+            }
+        }
 
-        System.out.print("Novo preço: ");
-        double preco = scanner.nextDouble();
+        int quantidade;
+        while(true) {
+         quantidade =  Entrada.lerInteiro(scanner, "Nova quantidade: ", 0, Integer.MAX_VALUE);
+         try {
+             validarQuantidade(quantidade);
+             break;
+         }catch (ProdutoInvalidoException e) {
+             System.out.println(e.getMessage());
+             }
+        }
 
-        System.out.print("Nova quantidade: ");
-        int quantidade = scanner.nextInt();
-
-        scanner.nextLine();
         produto.setNome(nome);
         produto.setPreco(preco);
         produto.setQuantidade(quantidade);

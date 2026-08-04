@@ -46,8 +46,8 @@ public class Main {
                 case 2:
                     produtoService.listarProdutos();
                     break;
-                case 3:
 
+                case 3:
                     try {
                         int id = Entrada.lerInteiro(scanner, "Digite o ID: ", 1, Integer.MAX_VALUE);
 
