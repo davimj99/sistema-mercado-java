@@ -27,4 +27,19 @@ public class Entrada {
             }
         }
     }
+    public static double lerDouble(Scanner scanner, String mensagem) {
+        while (true) {
+            System.out.print(mensagem);
+
+            try {
+                double valor = scanner.nextDouble();
+                scanner.nextLine();
+                return valor;
+
+            } catch (InputMismatchException e) {
+                System.out.println("Digite apenas valores reais, contendo numeros.");
+                scanner.nextLine();
+            }
+        }
+    }
 }

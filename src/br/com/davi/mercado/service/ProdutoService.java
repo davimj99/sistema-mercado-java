@@ -63,8 +63,7 @@ public class ProdutoService {
 
         double preco;
         while (true) {
-            System.out.print("Preço: ");
-            preco = scanner.nextDouble();
+            preco = Entrada.lerDouble(scanner, "Preço: ");
             try {
                 validarPreco(preco);
                 break;
