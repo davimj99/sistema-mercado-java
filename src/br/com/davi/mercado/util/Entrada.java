@@ -14,7 +14,7 @@ public class Entrada {
                 scanner.nextLine();
 
                 if (valor < min || valor > max) {
-                    System.out.println("Digite um valor entre " + min + " e " + max);
+                    System.out.println("Digite um valor que está disponivel no menu " + min + " a " + max);
                     continue;
                 }
                 return valor;
@@ -26,5 +26,26 @@ public class Entrada {
                 scanner.nextLine();
             }
         }
+    }
+    public static double lerDouble(Scanner scanner, String mensagem) {
+        while (true) {
+            System.out.print(mensagem);
+
+            try {
+                double valor = scanner.nextDouble();
+                scanner.nextLine();
+                return valor;
+
+            } catch (InputMismatchException e) {
+                System.out.println("Digite apenas valores reais, contendo numeros.");
+                scanner.nextLine();
+            }
+        }
+    }
+    public static String lerString(Scanner scanner, String mensagem) {
+
+        System.out.print(mensagem);
+
+        return scanner.nextLine();
     }
 }

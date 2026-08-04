@@ -1,137 +1,192 @@
 package br.com.davi.mercado.service;
 
 import br.com.davi.mercado.dominio.Produto;
+import br.com.davi.mercado.exception.ProdutoInvalidoException;
+import br.com.davi.mercado.exception.ProdutoNaoEncontradoException;
+import br.com.davi.mercado.util.Entrada;
 
 import java.util.Scanner;
 
 public class ProdutoService {
-    private Produto[] produtos = new Produto[100];
+
+    private final Produto[] produtos = new Produto[100];
     private int quantidadeProdutos = 0;
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
+    private void validarNome(String nome) {
+        if (nome == null || nome.isBlank()) {
+            throw new ProdutoInvalidoException("O nome do produto não pode estar vazio.");
+        }
 
-    public void cadastrarProduto(){
+        if (!nome.matches("[a-zA-ZÀ-ÿ ]+")) {
+            throw new ProdutoInvalidoException("O nome do produto deve conter apenas letras.");
+        }
+    }
+
+    private void validarPreco(double preco) {
+        if (preco <= 0) {
+            throw new ProdutoInvalidoException("O preço deve ser maior que zero.");
+        }
+    }
+
+    private void validarQuantidade(int quantidade) {
+        if (quantidade < 0) {
+            throw new ProdutoInvalidoException("A quantidade não pode ser negativa.");
+        }
+    }
+
+    private void validarCapacidade() {
+        if (quantidadeProdutos >= produtos.length) {
+            throw new ProdutoInvalidoException("Limite de produtos atingido.");
+        }
+    }
+
+    public int totalProdutos() {
+        return quantidadeProdutos;
+    }
+
+    public void cadastrarProduto() {
+        validarCapacidade();
         System.out.println("Cadastrando produto...");
         int id;
         while (true) {
-            System.out.println("ID: ");
-            id = scanner.nextInt();
-            scanner.nextLine();
+            id = Entrada.lerInteiro(scanner, "DIGITE O ID: ", 1, Integer.MAX_VALUE);
 
-            if(buscarPorId(id) == null){
+            try {
+                buscarPorId(id);
+                System.out.println("Erro: ID " + id + " já cadastrado. Tente outro ID.");
+            } catch (ProdutoNaoEncontradoException e) {
                 break;
             }
-            System.out.println("Erro: ID " + id + " já cadastrado. \n Tente outro ID.");
         }
-
         String nome;
-        while (true){
-            System.out.println("Nome: ");
-            nome = scanner.nextLine();
-
-            if(nome.isBlank()){
-                System.out.println("Erro: O nome do produto não pode estar vazio.");
-            }else{
+        while (true) {
+            nome = Entrada.lerString(scanner, "Nome: ");
+            try {
+                validarNome(nome);
                 break;
+            } catch (ProdutoInvalidoException e) {
+                System.out.println(e.getMessage());
             }
         }
 
         double preco;
-        while (true){
-        System.out.print("Preço: ");
-        preco = scanner.nextDouble();
-
-        if(preco > 0){
-            break;
-
-            }else {
-            System.out.println("Preço inválido! Digite um valor maior que zero. ");
+        while (true) {
+            preco = Entrada.lerDouble(scanner, "Preço: ");
+            try {
+                validarPreco(preco);
+                break;
+            } catch (ProdutoInvalidoException e) {
+                System.out.println(e.getMessage());
             }
         }
-        System.out.println("Quantidade: ");
-        int quantidade = scanner.nextInt();
-        scanner.nextLine();
+
+        int quantidade;
+        while (true) {
+            quantidade = Entrada.lerInteiro(scanner, "Quantidade: ", 0, Integer.MAX_VALUE);
+            try {
+                validarQuantidade(quantidade);
+                break;
+            } catch (ProdutoInvalidoException e) {
+
+                System.out.println(e.getMessage());
+            }
+        }
 
         Produto produto = new Produto(id, nome, preco, quantidade);
         produtos[quantidadeProdutos] = produto;
-
         quantidadeProdutos++;
         System.out.println("Produto cadastrado com sucesso!");
         System.out.println("Quantidade de produtos: " + quantidadeProdutos);
     }
 
-    public void listarProdutos(){
-        System.out.println("Quantidade de produtos cadastrados: " + quantidadeProdutos);
+
+    public void listarProdutos() {
+        if (quantidadeProdutos == 0 ){
+            System.out.println("Nenhum Produto Cadastrado");
+            return;
+        }
+        System.out.println("\n=== Lista de Produtos ===");
+        System.out.println("TOTAL DE PRODUTOS CADASTRADOS= " + quantidadeProdutos);
+
         for (int i = 0; i < quantidadeProdutos; i++) {
             Produto produto = produtos[i];
             System.out.println("ID: " + produto.getId());
             System.out.println("Nome: " + produto.getNome());
-            System.out.println("Preço: " + produto.getPreco());
+            System.out.println("Preço:R$  " + produto.getPreco());
             System.out.println("Quantidade: " + produto.getQuantidade());
             System.out.println("-------------------------");
-
         }
     }
+
     public Produto buscarPorId(int id) {
         for (int i = 0; i < quantidadeProdutos; i++) {
-
             Produto produto = produtos[i];
-
             if (produto.getId() == id) {
                 return produto;
             }
         }
-        return null;
+        throw new ProdutoNaoEncontradoException("Produto com ID " + id + " não encontrado.");
     }
 
     public void atualizarProduto() {
         System.out.println("\n=== Atualizar Produto ===");
-
-        System.out.print("Digite o ID do produto: ");
-        int id = scanner.nextInt();
-
+        int id = Entrada.lerInteiro(scanner, "Digite o ID do produto: ", 1, Integer.MAX_VALUE);
         Produto produto = buscarPorId(id);
 
-        if (produto != null) {
-
-            System.out.print("Novo nome: ");
-            String nome = scanner.next();
-            scanner.nextLine();
-
-            System.out.print("Novo preço: ");
-            double preco = scanner.nextDouble();
-            scanner.nextLine();
-
-            System.out.print("Nova quantidade: ");
-            int quantidade = scanner.nextInt();
-            scanner.nextLine();
-
-            produto.setNome(nome);
-            produto.setPreco(preco);
-            produto.setQuantidade(quantidade);
-            System.out.println("\nProduto atualizado com sucesso!");
-
-        } else {
-            System.out.println("\nProduto não encontrado.");
+        String nome;
+        while (true) {
+            nome = Entrada.lerString(scanner, "Novo Nome: ");
+            try {
+                validarNome(nome);
+                break;
+            } catch (ProdutoInvalidoException e) {
+                System.out.println(e.getMessage());
+            }
         }
+
+        double preco;
+        while (true) {
+            preco = Entrada.lerDouble(scanner, "Novo Preço:");
+            try {
+                validarPreco(preco);
+                break;
+            } catch (ProdutoInvalidoException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        int quantidade;
+        while (true) {
+            quantidade = Entrada.lerInteiro(scanner, "Nova quantidade: ", 0, Integer.MAX_VALUE);
+            try {
+                validarQuantidade(quantidade);
+                break;
+            } catch (ProdutoInvalidoException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        produto.setNome(nome);
+        produto.setPreco(preco);
+        produto.setQuantidade(quantidade);
+        System.out.println("\nProduto atualizado com sucesso!");
     }
 
     public void excluirProduto(int id) {
         for (int i = 0; i < quantidadeProdutos; i++) {
             if (produtos[i].getId() == id) {
-
                 for (int j = i; j < quantidadeProdutos - 1; j++) {
                     produtos[j] = produtos[j + 1];
                 }
 
                 produtos[quantidadeProdutos - 1] = null;
-
                 quantidadeProdutos--;
+
                 System.out.println("Produto removido com sucesso!");
                 return;
             }
         }
-
-        System.out.println("Produto não encontrado.");
+        throw new ProdutoNaoEncontradoException("Produto com ID " + id + " não encontrado.");
     }
 }

@@ -2,6 +2,8 @@ package br.com.davi.mercado;
 import br.com.davi.mercado.dominio.Produto;
 import br.com.davi.mercado.service.ProdutoService;
 import br.com.davi.mercado.util.Entrada;
+import br.com.davi.mercado.exception.ProdutoNaoEncontradoException;
+import br.com.davi.mercado.exception.ProdutoInvalidoException;
 import java.util.Scanner;
 
 public class Main {
@@ -34,7 +36,11 @@ public class Main {
 
             switch (opcao) {
                 case 1:
-                    produtoService.cadastrarProduto();
+                    try {
+                        produtoService.cadastrarProduto();
+                    } catch (ProdutoInvalidoException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
 
                 case 2:
@@ -42,27 +48,38 @@ public class Main {
                     break;
 
                 case 3:
-                    int id = Entrada.lerInteiro(scanner, "Digite o ID: ", 1, Integer.MAX_VALUE);
-                    Produto produto = produtoService.buscarPorId(id);
-                    if(produto != null){
+                    try {
+                        int id = Entrada.lerInteiro(scanner, "Digite o ID: ", 1, Integer.MAX_VALUE);
+
+                        Produto produto = produtoService.buscarPorId(id);
+
                         System.out.println("\nProduto encontrado!");
                         System.out.println("ID: " + produto.getId());
                         System.out.println("Nome: " + produto.getNome());
                         System.out.println("Preço: " + produto.getPreco());
                         System.out.println("Quantidade: " + produto.getQuantidade());
-                    } else {
-                        System.out.println("Produto não encontrado.");
+
+
+                    } catch (ProdutoNaoEncontradoException e) {
+                        System.out.println(e.getMessage());
                     }
                     break;
 
                 case 4:
-                    produtoService.atualizarProduto();
+                    try {
+                        produtoService.atualizarProduto();
+                    } catch (ProdutoNaoEncontradoException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
 
                 case 5:
-                    int idExcluir =
-                            Entrada.lerInteiro(scanner, "Digite o ID do produto: ", 1, Integer.MAX_VALUE);
-                    produtoService.excluirProduto(idExcluir);
+                    try {
+                        int idExcluir = Entrada.lerInteiro(scanner, "Digite o ID do produto: ", 1, Integer.MAX_VALUE);
+                        produtoService.excluirProduto(idExcluir);
+                    } catch (ProdutoNaoEncontradoException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
 
                 case 0:
