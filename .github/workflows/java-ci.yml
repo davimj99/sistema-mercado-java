@@ -1,0 +1,34 @@
+name: Java CI
+
+on:
+  push:
+    branches:
+      - main
+      - "release/**"
+
+  pull_request:
+    branches:
+      - main
+      - "release/**"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Baixar código
+        uses: actions/checkout@v4
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '26'
+          distribution: 'temurin'
+
+      - name: Compilar projeto
+        run: mvn clean compile
+
+      - name: Executar testes
+        run: mvn test
