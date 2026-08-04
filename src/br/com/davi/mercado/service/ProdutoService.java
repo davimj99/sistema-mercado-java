@@ -107,6 +107,7 @@ public class ProdutoService {
             return;
         }
         System.out.println("\n=== Lista de Produtos ===");
+        System.out.println("TOTAL DE PRODUTOS CADASTRADOS= " + quantidadeProdutos);
 
         for (int i = 0; i < quantidadeProdutos; i++) {
             Produto produto = produtos[i];
@@ -116,7 +117,6 @@ public class ProdutoService {
             System.out.println("Quantidade: " + produto.getQuantidade());
             System.out.println("-------------------------");
         }
-        System.out.println("Total de produtos: " + quantidadeProdutos);
     }
 
     public Produto buscarPorId(int id) {
