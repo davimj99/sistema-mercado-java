@@ -1,6 +1,8 @@
 package br.com.davi.mercado;
 import br.com.davi.mercado.dominio.Produto;
 import br.com.davi.mercado.service.ProdutoService;
+import br.com.davi.mercado.service.EstoqueService;
+import br.com.davi.mercado.service.MovimentacaoService;
 import br.com.davi.mercado.util.Entrada;
 import br.com.davi.mercado.exception.ProdutoNaoEncontradoException;
 import br.com.davi.mercado.exception.ProdutoInvalidoException;
@@ -11,6 +13,8 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         ProdutoService produtoService = new ProdutoService();
+        MovimentacaoService movimentacaoService = new MovimentacaoService();
+        EstoqueService estoqueService = new EstoqueService(produtoService, movimentacaoService,scanner);
 
         String[] menu = {
 
@@ -19,6 +23,9 @@ public class Main {
                 "3 - Buscar Produto",
                 "4 - Atualizar Produto",
                 "5 - Remover Produto",
+                "6 - Entrada de Estoque",
+                "7 - Saída de Estoque",
+                "8 - Histórico de Movimentações",
                 "0 - Sair"
         };
         int opcao;
@@ -32,7 +39,7 @@ public class Main {
                 System.out.println(item);
             }
 
-            opcao = Entrada.lerInteiro(scanner, "Escolha uma opção: ", 0, 5);
+            opcao = Entrada.lerInteiro(scanner, "Escolha uma opção: ", 0, 8);
 
             switch (opcao) {
                 case 1:
@@ -80,6 +87,18 @@ public class Main {
                     } catch (ProdutoNaoEncontradoException e) {
                         System.out.println(e.getMessage());
                     }
+                    break;
+
+                case 6:
+                    estoqueService.entradaEstoque();
+                    break;
+
+                case 7:
+                    estoqueService.saidaEstoque();
+                    break;
+
+                case 8:
+                    movimentacaoService.listarMovimentacoes();
                     break;
 
                 case 0:

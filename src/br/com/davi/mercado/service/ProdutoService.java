@@ -113,7 +113,7 @@ public class ProdutoService {
             Produto produto = produtos[i];
             System.out.println("ID: " + produto.getId());
             System.out.println("Nome: " + produto.getNome());
-            System.out.println("Preço:R$  " + produto.getPreco());
+            System.out.println("Preço:R$ " + produto.getPreco());
             System.out.println("Quantidade: " + produto.getQuantidade());
             System.out.println("-------------------------");
         }
